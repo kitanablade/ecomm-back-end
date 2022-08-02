@@ -11,10 +11,17 @@ router.get('/',(req,res)=>{
 })
 
 router.get("/:id",(req,res)=>{
-    Tag.findByPk(req.params.id,{
-        tag_name:req.body.tag_name
+    Tag.findOne({
+        where: {
+            id: req.params.id,
+        },
+        include: [{
+            model: Product,
+            trough: ProductTag
+        }]
+        // tag_name:req.body.tag_name
     }).then(data=>{
-        res.json(data)
+        res.status(200).json(data)
     }).catch(err=>{
         res.status(500).json({msg:"An error has occurred: ",err})
     })

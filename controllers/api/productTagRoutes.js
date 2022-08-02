@@ -11,11 +11,18 @@ router.get('/',(req,res)=>{
 })
 
 router.get("/:id",(req,res)=>{
-    ProductTag.findByPk(req.params.id,{
-        include:[{
-            model:Product,
-            include:[Category]
-        }]
+    Product.findOne({
+        where: {
+            id: req.params.id,
+        },
+        include: [
+            Category,
+            {
+                model: Tag,
+                through: ProductTag
+            },
+       
+        ]
     }).then(data=>{
         res.json(data)
     }).catch(err=>{
