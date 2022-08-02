@@ -1,15 +1,17 @@
 const express = require('express');
 const router = express.Router();
-// const locationRoutes = require("./locationRoutes")
-// const travellerRoutes = require("./travellerRoutes")
-// const tripRoutes = require("./tripRoutes")
+const categoryRoutes = require("./categoryRoutes")
+const productRoutes = require("./productRoutes")
+const productTagRoutes = require("./productTagRoutes")
+const tagRoutes = require("./tagRoutes")
 
 router.get('/',(req,res)=>{
     res.send('inside api folder');
 })
 
-// router.use('/locations',locationRoutes)
-// router.use('/travellers',travellerRoutes)
-// router.use('/trips',tripRoutes)
+router.use('/categories',categoryRoutes)
+router.use('/products',productRoutes)
+router.use('/product-tags',productTagRoutes)
+router.use('/tags',tagRoutes)
 
 module.exports = router;
