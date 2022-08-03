@@ -3,7 +3,7 @@ const router = express.Router();
 const {Category, Product, ProductTag, Tag} = require('../../models');
 
 router.get('/',(req,res)=>{
-    Category.findAll().then(data=>{
+    Category.findAll({include:[{model:Product}]}).then(data=>{
         res.json(data)
     }).catch(err=>{
         res.status(500).json({msg:"An error has occurred: ",err})
@@ -11,7 +11,7 @@ router.get('/',(req,res)=>{
 })
 
 router.get("/:id",(req,res)=>{
-    Category.findByPk(req.params.id,{
+    Category.findByPk(req.params.id,{include:[{model:Product}]
     }).then(data=>{
         res.json(data)
     }).catch(err=>{
