@@ -5,11 +5,12 @@ const {Category, Product, ProductTag, Tag} = require('../../models');
 router.get('/',(req,res)=>{
     Product.findAll({
         include: [
-            Category,
             {
-                model: Tag,
-                through: ProductTag
+                model: Tag
             },
+            {
+                model: Category
+            }
        
         ]
     }
@@ -21,13 +22,14 @@ router.get('/',(req,res)=>{
 })
 
 router.get("/:id",(req,res)=>{
-    Product.findOne({
+    Product.findByPk(req.params.id, {
         include: [
-        Category,
         {
-            model: Tag,
-            through: ProductTag
+            model: Tag
         },
+        {
+            model: Category
+        }
    
     ]
     }).then(data=>{
