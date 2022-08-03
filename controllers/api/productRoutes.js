@@ -39,8 +39,8 @@ router.delete("/:id",(req,res)=>{
         }
     }).then(data=>{
         res.json(data)
-        res.status(200).json({msg:`${req.body.product_name} deleted.`})
-    }).catch(err=>{
+        //res.status(200).json({msg:`${req.body.product_name} deleted.`})
+        }).catch(err=>{
         res.status(500).json({msg:"An error has occurred: ",err})
     })
 })
